@@ -4,7 +4,7 @@ export const authConfig = {
     authorizationEndpoint: 'http://localhost:8080/realms/Time/protocol/openid-connect/auth',
     tokenEndpoint: 'http://localhost:8080/realms/Time/protocol/openid-connect/token',
     redirectUri: 'http://localhost:5185',
-    scopes: ['openid', 'profile', 'email'],
+    scope: ['openid', 'profile', 'email'],
   };
   
   

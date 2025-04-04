@@ -1,8 +1,20 @@
+import Keycloak from 'keycloak-js';
+ const keycloak = new Keycloak({
+  url: 'http://localhost:8084/',
+  realm: 'Time',
+  clientId: 'Timeclient',
+});
+export default keycloak;
+
+
+
+
 export interface TokenResponse {
     access_token: string;
     refresh_token: string;
     expires_in: number;
   }
+  
   
   export async function exchangeCodeForToken(code: string): Promise<TokenResponse> {
     const body = new URLSearchParams({

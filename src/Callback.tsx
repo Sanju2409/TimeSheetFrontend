@@ -11,6 +11,7 @@ interface KeycloakToken {
     realm_access?: {
       roles: string[];
     };
+    name:string;
     [key: string]: any;
   }
 const Callback = () => {
@@ -31,25 +32,32 @@ const Callback = () => {
           client_secret: clientSecret,
           code,
           redirect_uri: redirectUri,
+          scope:"openid",
         }),
       })
         .then((res) => res.json())
         .then((data) => {
+            console.log("Data:",data)
           localStorage.setItem("access_token", data.access_token);
-
+          
           const decoded=jwtDecode<KeycloakToken>(data.access_token)
+          const name=decoded.name;
+          localStorage.setItem("name",name);
+          localStorage.setItem("id_token", data.id_token);
           const roles=decoded?.realm_access?.roles||[];
           if(roles.includes("ADMIN")){
             localStorage.setItem("isAdmin","true");
           }else{
             localStorage.setItem("isAdmin","false");
           }
-          navigate("/dashboard"); // Redirect to dashboard
+         
         })
         .catch((err) => {
           console.error("Error fetching token:", err);
         });
+        navigate("/dashboard"); // Redirect to dashboard
     }
+   
   }, [navigate]);
 
   return <div>Processing login...</div>;

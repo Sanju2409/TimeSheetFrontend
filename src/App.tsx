@@ -8,7 +8,7 @@ const clientId = "Timeclient";
 const redirectUri = "http://localhost:5185/callback";
 
 const redirectToKeycloakLogin = () => {
-  window.location.href = `${keycloakBaseURL}/realms/${realm}/protocol/openid-connect/auth?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}`;
+  window.location.href = `${keycloakBaseURL}/realms/${realm}/protocol/openid-connect/auth?client_id=${clientId}&response_type=code&scope=openid&redirect_uri=${redirectUri}`;
 };
 
 function App() {
